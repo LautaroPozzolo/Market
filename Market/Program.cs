@@ -4,6 +4,8 @@ using Market.Repository;
 using Market.Services.Interfaces;
 using Market.Services;
 using Microsoft.EntityFrameworkCore;
+using Market.Providers;
+using Market.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,9 @@ builder.Services.AddDbContext<DataContext>(options =>
 // Add Product services
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductServices, ProductServices>();
+
+builder.Services.AddSingleton<PathProvider>();
+builder.Services.AddSingleton<HelperUploadFiles>();
 
 var app = builder.Build();
 
